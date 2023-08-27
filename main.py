@@ -1,8 +1,4 @@
-import requests
-import bs4
-import sys
+from Elections_scraper import spustit_scraper as sc
 
-print(sys.argv)
-
-if len(sys.argv) != 3:
-  print("Zadej tři argumenty")
+if __name__ == "__main__":
+    sc()

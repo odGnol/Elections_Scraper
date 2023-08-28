@@ -1,22 +1,38 @@
-def validovat_promenne(sys_argv):
-   nazev_souboru_py = sys_argv[0] 
+# TODO je možné zlepšit validaci ?
+def validovat_odkaz(odkaz):
+   import requests as r
+
+   ziskat_odkaz = r.get(odkaz)
+   
+   if ziskat_odkaz.status_code != 200:
+      return False
+
+   return True
+
+def validovat_promenne(sys_argv: list) -> bool:
+   nazev_souboru_py = sys_argv[0]
+   
+   if len(sys_argv) != 3:
+      print(f"Soubor: {nazev_souboru_py} potřebuje povinné argumenty, tj. odkaz na stránky a název CSV souboru.")
+      return False
+    
    odkaz_stranky = sys_argv[1]
    nazev_souboru_csv = sys_argv[2]
 
-   if len(sys_argv) != 3:
-      print(f"Soubor: {nazev_souboru_py} potřebuje povinné argumenty s odkazem na stránky a se jménem CSV souboru.")
-      quit()
-   elif "https://volby.cz/pls/ps2017nss/" not in odkaz_stranky:
+   if "https://volby.cz/pls/ps2017nss/" not in odkaz_stranky:
       print(f"Odkaz stránky: {odkaz_stranky} nemá validní adresu.")
-      quit()
-   elif not nazev_souboru_csv.endswith(".csv"):
+      return False
+
+   odkaz_je_validni = validovat_odkaz(odkaz_stranky)
+
+   if odkaz_je_validni is False:
+      print(f"Zkontrolujte odkaz stránky: {odkaz_stranky}, nemá validní adresu.")
+      return False
+   
+   if not nazev_souboru_csv.endswith(".csv"):
       print(f"Název souboru: {nazev_souboru_csv} není ve formátu CSV!")
-      quit()
+      return False
    
    print("Spouštím soubor!")
    
-   return [odkaz_stranky, nazev_souboru_csv]
-
-# testovani
-# okres_odkaz = "https://volby.cz/pls/ps2017nss/ps32?xjazyk=CZ&xkraj=12&xnumnuts=7103"
-# nazev_souboru = f"vysledky_tst.csv"
+   return True

@@ -20,11 +20,13 @@ def najit_konkretni_tag(tag, hledanyTag: str, attr: dict):
     return tag.find(hledanyTag, attr)
 
 def vratit_vysledek(kod_obce, nazev_obce, volici_v_seznamu, vydane_obalky, platne_hlasy, strany):
-    vysledek = []
-    vysledek.append({"kod_obce": kod_obce,
-                             "nazev_obce": nazev_obce,
-                             "volici_v_seznamu": volici_v_seznamu,
-                             "vydane_obalky": vydane_obalky,
-                             "platne_hlasy": platne_hlasy,
-                             "kandidujici_strany": strany})
+    vysledek = dict()
+    vysledek.update({"Kód obce": kod_obce,
+                             "Název obce": nazev_obce,
+                             "Voliči v seznamu": volici_v_seznamu.text,
+                             "Vydané obálky": vydane_obalky.text,
+                             "Platné hlasy": platne_hlasy.text})
+    for klic in strany.keys():
+        vysledek.update({klic: strany[klic]})
+
     return vysledek

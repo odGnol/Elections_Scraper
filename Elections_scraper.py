@@ -7,6 +7,7 @@ def spustit_scraper():
     strany = dict()
     vystup_txt: list() = []
     obec_odkaz = ""
+    seznam = []
 
     promenne_lze_nacist = validovat_promenne(sys.argv)
     
@@ -46,5 +47,6 @@ def spustit_scraper():
                                         najit_konkretni_tag(tables[0], 'td', {"headers": "sa3"}),
                                         najit_konkretni_tag(tables[0], 'td', {"headers": "sa6"}),
                                         strany)
+                seznam.append(vystup_txt)
 
-    zapsat_data(vystup_txt, nazev_souboru)
+    zapsat_data(seznam, nazev_souboru)

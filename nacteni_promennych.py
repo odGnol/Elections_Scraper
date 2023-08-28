@@ -33,6 +33,6 @@ def validovat_promenne(sys_argv: list) -> bool:
       print(f"Název souboru: {nazev_souboru_csv} není ve formátu CSV!")
       return False
    
-   print("Spouštím soubor!")
+   print("Nechť scraping započne... 👾")
    
    return True

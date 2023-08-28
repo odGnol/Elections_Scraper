@@ -1,6 +1,6 @@
 import csv
 
-def zapsat_data(data: dict, jmeno_souboru: str) -> str:
+def zapsat_data(data: dict, jmeno_souboru: str) -> None:
     with open(jmeno_souboru, mode="w", encoding="utf-8", newline="") as csv_soubor:
         sloupce = data[0].keys()
 
@@ -8,3 +8,5 @@ def zapsat_data(data: dict, jmeno_souboru: str) -> str:
         zapis.writeheader()
 
         zapis.writerows(data)
+
+        print(f"Data se zapsala do souboru: '{jmeno_souboru}'. 🚨")

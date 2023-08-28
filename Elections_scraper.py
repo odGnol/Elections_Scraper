@@ -21,6 +21,8 @@ def spustit_scraper():
     rozdelene_html = rozdelat_html(odpoved)
     tables = najit_vsechny_tagy(rozdelene_html, 'table')
 
+    print("🛸 Stahují se data... 🛸")
+
     for table in tables:
         tr_tags = najit_vsechny_tagy(table, 'tr')
         for row in tr_tags:
@@ -50,3 +52,6 @@ def spustit_scraper():
                 seznam.append(vystup_txt)
 
     zapsat_data(seznam, nazev_souboru)
+
+    print("Scraper se ukončuje. 📯")
+    quit()
